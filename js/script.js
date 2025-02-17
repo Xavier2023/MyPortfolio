@@ -2,8 +2,30 @@ const resumeBtns = document.querySelectorAll('.resume-btn')
 const resumeDetails = document.querySelectorAll('.resume-details')
 const arrowRight = document.querySelector('.portfolio-box .navigation .arrow-right')
 const arrowLeft = document.querySelector('.portfolio-box .navigation .arrow-left')
+const lightMode = document.querySelector('#light-mode')
+const menuIcon = document.querySelector('#menu-icon')
+const navBar = document.querySelector('header nav')
+const Link = document.querySelector('a')
 
-resumeBtns.forEach((btn, index) => {
+// Link.addEventListener('click', (e) => {
+//     e.preventDefault()
+// })
+
+
+
+// lightMode.addEventListener('click', () => { 
+//     lightMode.classList.toggle('bx-moon')
+//     lightMode.classList.toggle('bx-sun')
+//     document.body.classList.toggle('light-mode')
+// })
+
+    
+menuIcon.addEventListener('click', () => {
+    menuIcon.classList.toggle('bx-x')
+    navBar.classList.toggle("active")
+})
+
+resumeBtns.forEach((btn, index) => {  
     btn.addEventListener('click', () => {
 
         resumeDetails.forEach(detail => {
@@ -57,3 +79,5 @@ arrowLeft.addEventListener('click', () => {
 
     activePortfolio();
 }) 
+
+// Dark and Light mode

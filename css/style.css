@@ -17,6 +17,12 @@
   --disabled-color: #fff3;
 }
 
+.light-mode {
+  --bg-color: #f6f8fa;
+  --secondary-bg-color: #fdfdfd;
+  --white-color: #333;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -87,6 +93,12 @@ section.active {
     visibility: visible;
     opacity: 1;
     overflow: auto;
+}
+
+#light-mode {
+  font-size: 2.4rem;
+  color: var(--white-color);
+  cursor: pointer;
 }
 
 .home-section {
@@ -199,7 +211,8 @@ section.active {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: hidden
+  
 }
 
 .home-img .img-container::before,
@@ -248,9 +261,8 @@ section.active {
   width: 85%;
   object-fit: cover;
   mix-blend-mode: lighten;
+  
 }
-
-
 
 
 /* Resume Section */
@@ -265,7 +277,8 @@ section.active {
     font-size: 4.5rem;
 }
 
-.resume-info p {
+.resume-info p,
+.resume-info li {
     font-size: 1.6rem;
 }
 
@@ -340,7 +353,7 @@ section.active {
     background: var(--secondary-bg-color);
     border-radius: .8rem;
     padding: 3rem 2.5rem;
-    height: calc((45rem - 2rem) / 2);
+    height: calc((55rem - 2rem) / 2);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -377,7 +390,6 @@ section.active {
 
 .resume-details.skills .resume-list {
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    width: 90%;
     height: auto;
     overflow: visible;
 }
@@ -456,7 +468,7 @@ section.active {
 
 .portfolio-box .numb {
   font-size: 8rem;
-  -webkit-text-stroke: .07rem var(--white-color);
+  -webkit-text-stroke: .2rem var(--white-color);
   color: transparent;
   line-height: 1;
 }
@@ -658,4 +670,142 @@ section.active {
 
 .contact-box .btn {
   margin-top: 2rem;
+}
+
+/* Break points */
+
+
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  header {
+    padding: 2rem 4%;
+  }
+
+  section {
+    padding: 10rem 4% 2rem;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .contact-box .field-box {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #menu-icon {
+    display: block;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr 50px 20px;
+  }
+
+  nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    background: var(--bg-color);
+    border-top: .1rem solid rgba(0, 0, 0, .2);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+    text-align: center;
+    display: none;
+  }
+
+  nav.active {
+    display: block;
+  }
+
+  nav a {
+    display: block;
+    margin: 4rem 0;
+  }
+
+  .home-section {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .home-img .img-container {
+    width: 35rem;
+    height: 35rem;
+  }
+
+  .resume-container,
+  .portfolio-container,
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-container {
+    gap: 3rem;
+  }
+
+  .resume-list {
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+}
+
+  .portfolio-container .portfolio-box:first-child {
+    order: 1;
+  }
+
+  .contact-box .field-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .home-img .img-container {
+    width: 30rem;
+    height: 30rem;
+  }
+
+  .contact-box .field-box {
+    grid-template-columns: 1fr;
+  }
+} 
+
+
+@media screen and (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .home-details,
+  .resume-container h2,
+  .resume-container .heading,
+  .resume-container .desc,
+  .resume-details.about .resume-edu {
+    text-align: center;
+  }
+
+  .home-details .btn-section {
+    flex-direction: column-reverse;
+  }
+
+  .home-details .btn-section .social {
+    margin-left: 0;
+    margin-bottom: 2rem;
+  }
+
+  .contact-box form {
+    padding: 2.5rem 3rem 3.5rem;
+  }
+
+  .contact-box h2 {
+    font-size: 3.5rem;
+  }
 }
