@@ -10,17 +10,18 @@
   font-family: "Poppins", serif;
 }
 :root {
-  --bg-color: #1f242d;
+  --bg-color: BLACK;
   --secondary-bg-color: #323946;
-  --main-color: blueviolet;
+  --main-color: GREEN;
   --white-color: white;
   --disabled-color: #fff3;
 }
 
 .light-mode {
   --bg-color: #f6f8fa;
-  --secondary-bg-color: #fdfdfd;
   --white-color: #333;
+  --disabled-color: #0003;
+  --main-color: GREEN;
 }
 
 html {
@@ -125,6 +126,49 @@ section.active {
     animation: display-text 16s linear infinite;
     animation-delay: calc(-4s * var(--i));
 }
+
+/* Light mode overrides */
+body.light-mode {
+  background-color: #ffffff;
+  color: #111111;
+}
+
+body.light-mode header {
+  background-color: #f0f0f0;
+  color: #111;
+}
+
+body.light-mode .btn {
+  background-color: #111;
+  color: #fff;
+}
+
+body.light-mode .btn:hover {
+  background-color: #333;
+}
+
+body.light-mode nav a {
+  color: #111;
+}
+
+body.light-mode nav a.active {
+  color: #007bff;
+}
+
+body.light-mode .bx-sun {
+  color: #ffcc00;
+}
+
+body.light-mode .bx-moon {
+  color: #333;
+}
+
+body.light-mode .home-img,
+body.light-mode .img-container,
+body.light-mode .image {
+  background-color: transparent;
+}
+
 
 @keyframes display-text {
     25%,100% {
