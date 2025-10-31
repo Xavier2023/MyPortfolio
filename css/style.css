@@ -20,6 +20,7 @@
 .light-mode {
   --bg-color: #f6f8fa;
   --white-color: #333;
+  --secondary-bg-color: white;
   --disabled-color: #0003;
   --main-color: GREEN;
 }
@@ -152,7 +153,7 @@ body.light-mode nav a {
 }
 
 body.light-mode nav a.active {
-  color: #007bff;
+  color: green;
 }
 
 body.light-mode .bx-sun {
@@ -416,8 +417,7 @@ body.light-mode .image {
 .resume-item .company,
 .resume-edu .company {
     position: relative;
-    margin-left: 2rem;
-    margin-bottom: 2rem;
+    margin-left: 2.5rem;
 }
 
 .resume-item .company::before,
@@ -446,6 +446,18 @@ body.light-mode .image {
 .resume-details.skills .resume-edu i {
     font-size: 8.5rem;
     transition: .5s;
+}
+
+.resume-list .resume-item .company-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 2rem;
+}
+
+.resume-list .resume-item i {
+    font-size: 2rem;
+    color: var(--main-color);
 }
 
 .resume-details.skills .resume-edu:hover i {
@@ -598,7 +610,8 @@ body.light-mode .image {
   height: inherit;
 }
 
-.portfolio-carousel .img-item img {
+.portfolio-carousel .img-item img,
+.portfolio-carousel .img-item video {
   display: block;
   width: 100%;
   height: 100%;
@@ -852,4 +865,15 @@ body.light-mode .image {
   .contact-box h2 {
     font-size: 3.5rem;
   }
+}
+
+/* --- Fix image covering issue in light mode --- */
+body.light-mode .home-img .img-container .image {
+  background-color: transparent !important;
+  mix-blend-mode: normal !important;
+  z-index: 2;
+}
+body.light-mode .home-img .img-container::before,
+body.light-mode .home-img .img-container::after {
+  opacity: 0.5;
 }
