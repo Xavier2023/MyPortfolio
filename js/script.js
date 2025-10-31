@@ -88,3 +88,45 @@ arrowLeft.addEventListener('click', () => {
     }
     activePortfolio();
 });
+
+
+const contactForm = document.getElementById("contact-form");
+const statusMsg = document.getElementById("status");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    statusMsg.textContent = "Sending message...";
+    statusMsg.style.color = "var(--text-color)";
+
+    const formData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      subject: document.getElementById("subject").value,
+      message: document.getElementById("message").value,
+    };
+
+    try {
+      const res = await fetch("/.netlify/functions/sendEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        statusMsg.textContent = "✅ Message sent successfully!";
+        statusMsg.style.color = "green";
+        contactForm.reset();
+      } else {
+        statusMsg.textContent =
+          "❌ Failed to send message. Please try again later.";
+        statusMsg.style.color = "red";
+      }
+    } catch (err) {
+      statusMsg.textContent = "⚠️ Network error. Please check your connection.";
+      statusMsg.style.color = "orange";
+      console.error(err);
+    }
+  });
+}

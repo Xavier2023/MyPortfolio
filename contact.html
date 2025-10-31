@@ -22,15 +22,17 @@
       </nav>
       <div class="bx bx-sun" id="light-mode"></div>
     </header>
+
     <section class="contact active">
       <div class="contact-container">
+        <!-- Left Contact Info -->
         <div class="contact-box">
           <h2>Let's Work Together</h2>
           <p class="desc">
             I'm always open to discussing new job opportunities, collaborations,
             or creative projects. Whether you have a question, an idea, or need
             a frontend engineer to bring your vision to life, feel free to reach
-            out I’d love to connect, share ideas, and build something amazing
+            out — I’d love to connect, share ideas, and build something amazing
             together!
           </p>
 
@@ -56,9 +58,12 @@
             </div>
           </div>
         </div>
+
+        <!-- Right Contact Form -->
         <div class="contact-box">
           <form id="contact-form">
             <h2 class="heading">Contact <span>Me</span></h2>
+
             <div class="field-box">
               <input type="text" id="name" placeholder="Full Name" required />
               <input
@@ -71,7 +76,6 @@
                 type="text"
                 id="phone"
                 placeholder="Phone Number"
-                required
               />
               <input
                 type="text"
@@ -85,11 +89,17 @@
                 required
               ></textarea>
             </div>
-            <button type="submit" class="btn">Send Message</button>
+
+            <button type="submit" class="btn">
+              <i class="bx bx-send"></i> Send Message
+            </button>
+
+            <p id="status" class="status"></p>
           </form>
         </div>
       </div>
     </section>
+
     <script src="/js/script.js"></script>
   </body>
 </html>
