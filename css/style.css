@@ -47,13 +47,13 @@ header {
 }
 
 .heading {
-    font-size: 4.5rem;
-    text-align: center;
-    margin-bottom: 2rem;
+  font-size: 4.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .heading span {
-    color: var(--main-color);
+  color: var(--main-color);
 }
 
 .logo {
@@ -92,9 +92,9 @@ section {
 }
 
 section.active {
-    visibility: visible;
-    opacity: 1;
-    overflow: auto;
+  visibility: visible;
+  opacity: 1;
+  overflow: auto;
 }
 
 #light-mode {
@@ -120,12 +120,12 @@ section.active {
 }
 
 .home-details h2 span {
-    position: relative;
-    display: inline-block;
-    color: transparent;
-    -webkit-text-stroke: .07em var(--main-color);
-    animation: display-text 16s linear infinite;
-    animation-delay: calc(-4s * var(--i));
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: 0.07em var(--main-color);
+  animation: display-text 16s linear infinite;
+  animation-delay: calc(-4s * var(--i));
 }
 
 /* Light mode overrides */
@@ -170,32 +170,33 @@ body.light-mode .image {
   background-color: transparent;
 }
 
-
 @keyframes display-text {
-    25%,100% {
-        display: none;
-    }
+  25%,
+  100% {
+    display: none;
+  }
 }
 .home-details h2 span::before {
-    content: attr(data-text);
-    position: absolute;
-    width: 0;
-    border-right: .2rem solid var(--main-color);
-    color: var(--main-color);
-    white-space: nowrap;
-    overflow: hidden;
-    animation: fill-text 4s linear infinite;
+  content: attr(data-text);
+  position: absolute;
+  width: 0;
+  border-right: 0.2rem solid var(--main-color);
+  color: var(--main-color);
+  white-space: nowrap;
+  overflow: hidden;
+  animation: fill-text 4s linear infinite;
 }
 
-
 @keyframes fill-text {
-    10%,100% {
-        width: 0;
-    }
+  10%,
+  100% {
+    width: 0;
+  }
 
-    70%,90% {
-        width: 100%;
-    }
+  70%,
+  90% {
+    width: 100%;
+  }
 }
 .home-details p {
   font-size: 1.6rem;
@@ -256,13 +257,12 @@ body.light-mode .image {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden
-  
+  overflow: hidden;
 }
 
 .home-img .img-container::before,
 .home-img .img-container::after {
-  content:  "";
+  content: "";
   position: absolute;
   width: 40rem;
   height: 100rem;
@@ -306,146 +306,142 @@ body.light-mode .image {
   width: 85%;
   object-fit: cover;
   mix-blend-mode: lighten;
-  
 }
-
 
 /* Resume Section */
 
 .resume-container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5rem;
 }
 
 .resume-info h2 {
-    font-size: 4.5rem;
+  font-size: 4.5rem;
 }
 
 .resume-info p,
 .resume-info li {
-    font-size: 1.6rem;
+  font-size: 1.6rem;
 }
 
 .resume-info .desc {
-    margin: 2rem 0 2.5rem;
+  margin: 2rem 0 2.5rem;
 }
 
 .resume-info .resume-btn {
-    width: 100%;
-    height: 5.3rem;
-    background: var(--secondary-bg-color);
-    border: .2rem solid var(--secondary-bg-color);
-    font-size: 1.6rem;
-    color: var(--white-color);
-    font-weight: 500;
-    margin-bottom: 2rem;
-    border-radius: .8rem;
-    cursor: pointer;
+  width: 100%;
+  height: 5.3rem;
+  background: var(--secondary-bg-color);
+  border: 0.2rem solid var(--secondary-bg-color);
+  font-size: 1.6rem;
+  color: var(--white-color);
+  font-weight: 500;
+  margin-bottom: 2rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
 }
 
 .resume-info .resume-btn.active {
-    border-color: var(--main-color);
-    color: var(--main-color);
+  border-color: var(--main-color);
+  color: var(--main-color);
 }
 
 .resume-info .heading {
-    font-size: 3.5rem;
-    text-align: left;
+  font-size: 3.5rem;
+  text-align: left;
 }
 
 .resume-details {
-    display: none;
+  display: none;
 }
 
 .resume-details.active {
-    display: block;
+  display: block;
 }
 
 .resume-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
-    gap: 2rem;
-    height: 45rem;
-    overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+  gap: 2rem;
+  height: 45rem;
+  overflow: auto;
 }
 
-
 .resume-list::-webkit-scrollbar {
-    width: .7rem;
+  width: 0.7rem;
 }
 
 .resume-list::-webkit-scrollbar-thumb {
-    background: transparent;
-    border-radius: 1rem;
+  background: transparent;
+  border-radius: 1rem;
 }
 
 .resume-list:hover::-webkit-scrollbar-thumb {
-    background: var(--main-color);
+  background: var(--main-color);
 }
-
 
 .resume-list .resume-item {
-    background: var(--secondary-bg-color);
-    border-radius: .8rem;
-    padding: 3rem 2.5rem;
-    height: calc((85rem - 2rem) / 2);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  background: var(--secondary-bg-color);
+  border-radius: 0.8rem;
+  padding: 3rem 2.5rem;
+  height: calc((100rem - 2rem) / 2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .resume-list .resume-edu {
-    background: var(--secondary-bg-color);
-    border-radius: .8rem;
-    padding: 3rem 2.5rem;
-    height: calc((55rem - 2rem) / 2);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  background: var(--secondary-bg-color);
+  border-radius: 0.8rem;
+  padding: 3rem 2.5rem;
+  height: calc((55rem - 2rem) / 2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .resume-item .year,
 .resume-edu .year {
-    color: var(--main-color);
+  color: var(--main-color);
 }
 
 .resume-item h3,
 .resume-edu h3 {
-    font-size: 2.2rem;
+  font-size: 2.2rem;
 }
 
 .resume-item .company,
 .resume-edu .company {
-    position: relative;
-    margin-left: 2.5rem;
+  position: relative;
+  margin-left: 2.5rem;
 }
 
 .resume-item .company::before,
 .resume-edu .company::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: .5rem;
-    background: var(--main-color);
-    border-radius: 50%;
-    margin-left: -2rem;
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.5rem;
+  background: var(--main-color);
+  border-radius: 50%;
+  margin-left: -2rem;
 }
 
 .resume-details.skills .resume-list {
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    height: auto;
-    overflow: visible;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  height: auto;
+  overflow: visible;
 }
 
 .resume-details.skills .resume-edu {
-    position: relative;
-    align-items: center;
-    height: auto;
+  position: relative;
+  align-items: center;
+  height: auto;
 }
 .resume-details.skills .resume-edu i {
-    font-size: 8.5rem;
-    transition: .5s;
+  font-size: 8.5rem;
+  transition: 0.5s;
 }
 
 .resume-list .resume-item .company-location {
@@ -456,32 +452,32 @@ body.light-mode .image {
 }
 
 .resume-list .resume-item i {
-    font-size: 2rem;
-    color: var(--main-color);
+  font-size: 2rem;
+  color: var(--main-color);
 }
 
 .resume-details.skills .resume-edu:hover i {
-    color: var(--main-color);
+  color: var(--main-color);
 }
 
 .resume-details.skills .resume-edu span {
-    position: absolute;
-    top: -20%;
-    background: var(--white-color);
-    color: var(--bg-color);
-    font-size: 1.6rem;
-    padding: .5rem 1rem;
-    border-radius: .6rem;
-    pointer-events: none;
-    opacity: 0;
-    transform: scale(.9);
-    transition: .2s;
+  position: absolute;
+  top: -20%;
+  background: var(--white-color);
+  color: var(--bg-color);
+  font-size: 1.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: 0.2s;
 }
 
 .resume-details.skills .resume-edu:hover span {
-    top: -25%;
-    opacity: 1;
-    transform: scale(1);
+  top: -25%;
+  opacity: 1;
+  transform: scale(1);
 }
 
 .resume-details.about .resume-list {
@@ -490,7 +486,7 @@ body.light-mode .image {
 }
 .resume-details.about .resume-edu {
   height: auto;
-  padding: 0 0 .5rem;
+  padding: 0 0 0.5rem;
   background: transparent;
 }
 
@@ -504,9 +500,7 @@ body.light-mode .image {
   font-size: 1.8rem;
 }
 
-
 /* Portfolio Page */
-
 
 .portfolio-container {
   display: grid;
@@ -524,14 +518,14 @@ body.light-mode .image {
 
 .portfolio-box .numb {
   font-size: 8rem;
-  -webkit-text-stroke: .2rem var(--white-color);
+  -webkit-text-stroke: 0.2rem var(--white-color);
   color: transparent;
   line-height: 1;
 }
 
 .portfolio-box h3 {
   font-size: 3.5rem;
-  margin: .8rem 0.2rem;
+  margin: 0.8rem 0.2rem;
 }
 
 .portfolio-box p {
@@ -541,7 +535,7 @@ body.light-mode .image {
 .portfolio-box .tech {
   margin: 2rem 0;
   color: var(--main-color);
-  border-bottom: .1rem solid var(--white-color);
+  border-bottom: 0.1rem solid var(--white-color);
   padding-bottom: 2rem;
 }
 
@@ -553,7 +547,7 @@ body.light-mode .image {
   color: var(--white-color);
   border-radius: 50%;
   background: var(--secondary-bg-color);
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .portfolio-box .live-github a:hover {
@@ -572,16 +566,16 @@ body.light-mode .image {
   position: absolute;
   top: -60%;
   left: 50%;
-  transform: translateX(-50%) scale(.9);
+  transform: translateX(-50%) scale(0.9);
   font-size: 1.6rem;
   white-space: nowrap;
-  padding: .5rem 1rem;
-  border-radius: .6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
   pointer-events: none;
   background: var(--white-color);
   color: var(--bg-color);
   opacity: 0;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .portfolio-box .live-github a:hover span {
@@ -603,7 +597,7 @@ body.light-mode .image {
   grid-auto-columns: 100%;
   gap: 2rem;
   height: inherit;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .portfolio-carousel .img-item {
@@ -617,7 +611,6 @@ body.light-mode .image {
   height: 100%;
   object-fit: contain;
   border-radius: 1rem;
-
 }
 
 .portfolio-box .navigation {
@@ -627,11 +620,11 @@ body.light-mode .image {
 
 .portfolio-box .navigation button {
   display: inline-flex;
-  padding: .4rem;
+  padding: 0.4rem;
   background: var(--secondary-bg-color);
   color: var(--main-color);
-  border: .2rem solid var(--main-color);
-  border-radius: .6rem;
+  border: 0.2rem solid var(--main-color);
+  border-radius: 0.6rem;
   font-size: 4rem;
   cursor: pointer;
 }
@@ -679,7 +672,7 @@ body.light-mode .image {
   color: var(--main-color);
   font-size: 3rem;
   padding: 1.2rem;
-  border-radius: .6rem;
+  border-radius: 0.6rem;
   margin-right: 1.5rem;
 }
 
@@ -708,8 +701,8 @@ body.light-mode .image {
 .contact-box .field-box input {
   padding: 1.5rem;
   background: var(--bg-color);
-  border: .15rem solid var(--bg-color);
-  border-radius: .6rem;
+  border: 0.15rem solid var(--bg-color);
+  border-radius: 0.6rem;
   font-size: 1.6rem;
   color: var(--white-color);
 }
@@ -729,8 +722,45 @@ body.light-mode .image {
   margin-top: 2rem;
 }
 
-/* Break points */
+/* Add to your existing CSS */
 
+/* Toast Notification Styles */
+.toastify {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 15px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, sans-serif;
+}
+
+.toastify-success {
+  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+}
+
+.toastify-error {
+  background: linear-gradient(135deg, #ff5252 0%, #b71c1c 100%);
+}
+
+/* Loading state for button */
+.btn-loading {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.btn-loading i {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Break points */
 
 @media screen and (max-width: 1200px) {
   html {
@@ -771,8 +801,8 @@ body.light-mode .image {
     width: 100%;
     padding: 1rem 0;
     background: var(--bg-color);
-    border-top: .1rem solid rgba(0, 0, 0, .2);
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     text-align: center;
     display: none;
   }
@@ -809,7 +839,7 @@ body.light-mode .image {
 
   .resume-list {
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-}
+  }
 
   .portfolio-container .portfolio-box:first-child {
     order: 1;
@@ -818,7 +848,6 @@ body.light-mode .image {
   .contact-box .field-box {
     grid-template-columns: repeat(2, 1fr);
   }
-
 }
 
 @media screen and (max-width: 600px) {
@@ -830,15 +859,13 @@ body.light-mode .image {
   .contact-box .field-box {
     grid-template-columns: 1fr;
   }
-} 
-
+}
 
 @media screen and (max-width: 450px) {
   html {
     font-size: 50%;
   }
 }
-
 
 @media screen and (max-width: 400px) {
   .home-details,

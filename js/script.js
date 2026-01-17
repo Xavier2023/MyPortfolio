@@ -7,6 +7,9 @@ const menuIcon = document.querySelector('#menu-icon');
 const navBar = document.querySelector('header nav');
 const Link = document.querySelector('a');
 
+
+emailjs.init("z0XhFgiiMVOB6Nc7R");
+
 // Prevent default behavior for all anchor clicks (adjust if needed)
 Link.addEventListener('click', (e) => {
     e.preventDefault();
@@ -129,4 +132,135 @@ if (contactForm) {
       console.error(err);
     }
   });
+}
+
+
+
+// Contact form initialization
+function initializeContactForm() {
+  const contactForm = document.getElementById("contact-form");
+  const submitBtn = document.getElementById("submit-btn");
+  const status = document.getElementById("status");
+
+  if (contactForm) {
+    // DON'T clone the form - just add the event listener directly
+    contactForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      console.log("Form submission started");
+
+      // Get form values from THIS form (not global document)
+      const name = this.querySelector("#name").value.trim();
+      const email = this.querySelector("#email").value.trim();
+      const phone = this.querySelector("#phone").value.trim();
+      const subject = this.querySelector("#subject").value.trim();
+      const message = this.querySelector("#message").value.trim();
+
+      // Validate form
+      if (!name || !email || !subject || !message) {
+        showToast("Please fill in all required fields", "error");
+        return;
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showToast("Please enter a valid email address", "error");
+        return;
+      }
+
+      // Show loading state
+      submitBtn.classList.add("btn-loading");
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="bx bx-loader-alt"></i> Sending...';
+
+      try {
+        // Prepare template parameters
+        const templateParams = {
+          name: name,
+          email: email,
+          phone: phone || "Not provided",
+          message: message,
+          date: new Date().toLocaleString(),
+          subject: subject,
+        };
+
+        console.log("Sending email with params:", templateParams);
+
+        // Send email using EmailJS
+        const response = await emailjs.send(
+          "service_lr83vhf",
+          "template_2dfbv1r",
+          templateParams
+        );
+
+        console.log("EmailJS response:", response);
+
+        // Show success message
+        showToast(
+          "Message sent successfully! I'll get back to you soon.",
+          "success"
+        );
+
+        // Clear form
+        this.reset();
+
+        // Update status element
+        if (status) {
+          status.textContent = "Message sent successfully!";
+          status.style.color = "#4CAF50";
+          setTimeout(() => {
+            status.textContent = "";
+          }, 5000);
+        }
+      } catch (error) {
+        console.error("Error sending email:", error);
+        showToast("Failed to send message. Please try again later.", "error");
+
+        if (status) {
+          status.textContent = "Error sending message. Please try again.";
+          status.style.color = "#FF5252";
+        }
+      } finally {
+        // Reset button state
+        submitBtn.classList.remove("btn-loading");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="bx bx-send"></i> Send Message';
+      }
+    });
+
+    // Optional: Add input validation
+    document
+      .querySelectorAll("#contact-form input, #contact-form textarea")
+      .forEach((input) => {
+        input.addEventListener("input", function () {
+          this.classList.remove("error");
+          if (status) status.textContent = "";
+        });
+      });
+  }
+}
+
+// Toast notification function
+function showToast(message, type = "info") {
+  Toastify({
+    text: message,
+    duration: 4000,
+    gravity: "top",
+    position: "right",
+    stopOnFocus: true,
+    className:
+      type === "success"
+        ? "toastify-success"
+        : type === "error"
+        ? "toastify-error"
+        : "toastify",
+    style: {
+      background:
+        type === "success"
+          ? "linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)"
+          : type === "error"
+          ? "linear-gradient(135deg, #FF5252 0%, #B71C1C 100%)"
+          : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    },
+  }).showToast();
 }

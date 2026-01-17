@@ -8,6 +8,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <!-- Toastify CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
     <title>Onyedikachi Orjinta's Portfolio</title>
   </head>
   <body>
@@ -32,7 +38,7 @@
             I'm always open to discussing new job opportunities, collaborations,
             or creative projects. Whether you have a question, an idea, or need
             a frontend engineer to bring your vision to life, feel free to reach
-            out — I’d love to connect, share ideas, and build something amazing
+            out — I'd love to connect, share ideas, and build something amazing
             together!
           </p>
 
@@ -65,32 +71,42 @@
             <h2 class="heading">Contact <span>Me</span></h2>
 
             <div class="field-box">
-              <input type="text" id="name" placeholder="Full Name" required />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Full Name"
+                required
+              />
               <input
                 type="email"
                 id="email"
+                name="email"
                 placeholder="Email Address"
                 required
               />
               <input
                 type="text"
                 id="phone"
+                name="phone"
                 placeholder="Phone Number"
               />
               <input
                 type="text"
                 id="subject"
+                name="subject"
                 placeholder="Email Subject"
                 required
               />
               <textarea
                 id="message"
+                name="message"
                 placeholder="Your Message Here"
                 required
               ></textarea>
             </div>
 
-            <button type="submit" class="btn">
+            <button type="submit" class="btn" id="submit-btn">
               <i class="bx bx-send"></i> Send Message
             </button>
 
@@ -100,6 +116,22 @@
       </div>
     </section>
 
+    <!-- Toastify JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <!-- EmailJS SDK -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
     <script src="/js/script.js"></script>
   </body>
 </html>
+
+
+
+
+
+
