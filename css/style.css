@@ -38,7 +38,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 2rem 9%;
+  padding: 2rem 5%;
   background-color: var(--bg-color);
   display: flex;
   justify-content: space-between;
@@ -84,7 +84,7 @@ section {
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 10rem 9% 2rem;
+  padding: 10rem 5% 2rem;
   background-color: var(--bg-color);
   visibility: hidden;
   opacity: 0;
@@ -639,7 +639,49 @@ body.light-mode .image {
 .portfolio-box .navigation .arrow-right {
   margin-left: 1.5rem;
 }
+/* Video Player Progress Bar Styles */
+.video-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 10; /* Make sure it's on top */
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+}
 
+.video-progress-bar {
+    height: 100%;
+    background: var(--primary-color, #667eea); /* Use your theme color */
+    width: 0%;
+    transition: width 0.1s linear;
+    border-radius: 0 0 0 8px;
+}
+
+/* Update video container to accommodate progress bar */
+.img-item.video-container {
+    position: relative;
+  width: 100%;
+    height: 100%;
+}
+
+/* Make sure video overlay doesn't cover progress bar */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 4px); /* Leave space for progress bar */
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
 
 
 .img-item video {
@@ -650,26 +692,6 @@ body.light-mode .image {
   cursor: pointer;
 }
 
-.video-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
 
 .video-overlay.hidden {
   opacity: 0;
@@ -692,7 +714,7 @@ body.light-mode .image {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 2;
+  z-index: 11;
   transition: all 0.3s ease;
   outline: none;
 }

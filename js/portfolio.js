@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ".portfolio-box .navigation .arrow-left"
   );
 
-  // Initialize video controls
+  // Initialize video controls FIRST
   initializeVideoControls();
 
   if (arrowRight && arrowLeft) {
@@ -74,15 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initialize active state
     activePortfolio();
-
-    // Log the elements for debugging
-    console.log("Arrow Right:", arrowRight);
-    console.log("Arrow Left:", arrowLeft);
-    console.log(
-      "Image Slide:",
-      document.querySelector(".portfolio-carousel .img-slide")
-    );
-    console.log("Portfolio Details:", portfolioDetails);
   } else {
     console.error("Could not find portfolio navigation arrows");
     console.log("Arrow Right found:", !!arrowRight);
@@ -103,12 +94,26 @@ function initializeVideoControls() {
     // Remove autoplay and loop attributes
     video.removeAttribute("autoplay");
     video.removeAttribute("loop");
-    video.controls = false; // We'll use our own controls
+    video.controls = false;
+
+    // Ensure video has proper dimensions
+    video.style.width = "100%";
+    video.style.height = "100%";
+    video.style.objectFit = "cover";
 
     // Create video container if it doesn't exist
     let videoContainer = video.parentElement;
     if (!videoContainer.classList.contains("video-container")) {
       videoContainer.classList.add("video-container");
+
+      // Style the container
+      videoContainer.style.position = "relative";
+      videoContainer.style.overflow = "hidden";
+      videoContainer.style.borderRadius = "8px";
+
+      // Create video overlay
+      const overlay = document.createElement("div");
+      overlay.className = "video-overlay";
 
       // Create play/pause button
       const playButton = document.createElement("button");
@@ -116,34 +121,81 @@ function initializeVideoControls() {
       playButton.innerHTML = '<i class="bx bx-play"></i>';
       playButton.setAttribute("aria-label", "Play video");
 
+      // Style play button
+      playButton.style.position = "absolute";
+      playButton.style.top = "50%";
+      playButton.style.left = "50%";
+      playButton.style.transform = "translate(-50%, -50%)";
+      playButton.style.width = "70px";
+      playButton.style.height = "70px";
+      playButton.style.borderRadius = "50%";
+      playButton.style.background = "rgba(0, 0, 0, 0.7)";
+      playButton.style.border = "3px solid white";
+      playButton.style.color = "white";
+      playButton.style.fontSize = "28px";
+      playButton.style.display = "flex";
+      playButton.style.alignItems = "center";
+      playButton.style.justifyContent = "center";
+      playButton.style.cursor = "pointer";
+      playButton.style.zIndex = "11";
+      playButton.style.outline = "none";
+
       // Create loading spinner
       const spinner = document.createElement("div");
       spinner.className = "video-loading";
       spinner.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i>';
+      spinner.style.position = "absolute";
+      spinner.style.top = "50%";
+      spinner.style.left = "50%";
+      spinner.style.transform = "translate(-50%, -50%)";
+      spinner.style.color = "white";
+      spinner.style.fontSize = "28px";
+      spinner.style.display = "none";
+      spinner.style.zIndex = "12";
 
-      // Create video overlay
-      const overlay = document.createElement("div");
-      overlay.className = "video-overlay";
+      // Create progress bar container
       const progressBar = document.createElement("div");
       progressBar.className = "video-progress";
+
+      // Style progress bar container
+      progressBar.style.position = "absolute";
+      progressBar.style.bottom = "0";
+      progressBar.style.left = "0";
+      progressBar.style.width = "100%";
+      progressBar.style.height = "4px";
+      progressBar.style.background = "rgba(255, 255, 255, 0.2)";
+      progressBar.style.zIndex = "10";
+      progressBar.style.borderRadius = "0 0 8px 8px";
+      progressBar.style.overflow = "hidden";
+
+      // Create progress bar inner element
       const progressBarInner = document.createElement("div");
       progressBarInner.className = "video-progress-bar";
-      progressBar.appendChild(progressBarInner);
-      videoContainer.appendChild(progressBar);
+
+      // Style progress bar inner
+      progressBarInner.style.height = "100%";
+      progressBarInner.style.background = "#667eea"; // Your primary color
+      progressBarInner.style.width = "0%";
+      progressBarInner.style.transition = "width 0.1s linear";
+      progressBarInner.style.borderRadius = "0 0 0 8px";
 
       // Append elements
+      progressBar.appendChild(progressBarInner);
       videoContainer.appendChild(overlay);
       videoContainer.appendChild(playButton);
       videoContainer.appendChild(spinner);
+      videoContainer.appendChild(progressBar);
 
       // Add click event to play button
-      playButton.addEventListener("click", () => {
-        togglePlayPause(video, playButton, spinner);
+      playButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        togglePlayPause(video, playButton, spinner, progressBarInner);
       });
 
       // Add click event to video overlay
-      overlay.addEventListener("click", () => {
-        togglePlayPause(video, playButton, spinner);
+      overlay.addEventListener("click", (e) => {
+        e.stopPropagation();
+        togglePlayPause(video, playButton, spinner, progressBarInner);
       });
 
       // Video event listeners
@@ -163,7 +215,8 @@ function initializeVideoControls() {
         playButton.innerHTML = '<i class="bx bx-play"></i>';
         playButton.classList.remove("playing");
         overlay.classList.remove("hidden");
-        video.currentTime = 0; // Reset to beginning
+        video.currentTime = 0;
+        progressBarInner.style.width = "0%";
       });
 
       video.addEventListener("waiting", () => {
@@ -177,16 +230,25 @@ function initializeVideoControls() {
       });
 
       video.addEventListener("timeupdate", () => {
-        // Update progress if needed
-        updateVideoProgress(video);
+        updateVideoProgress(video, progressBarInner);
       });
+
+      // Initialize progress bar when metadata is loaded
+      video.addEventListener("loadedmetadata", () => {
+        updateVideoProgress(video, progressBarInner);
+      });
+
+      // Update progress bar initially
+      if (video.readyState >= 1) {
+        updateVideoProgress(video, progressBarInner);
+      }
     }
   });
 
   console.log(`Video controls initialized for ${videos.length} videos`);
 }
 
-function togglePlayPause(video, playButton, spinner) {
+function togglePlayPause(video, playButton, spinner, progressBar) {
   if (video.paused || video.ended) {
     video.play().catch((error) => {
       console.error("Error playing video:", error);
@@ -198,10 +260,8 @@ function togglePlayPause(video, playButton, spinner) {
   }
 }
 
-// Update the updateVideoProgress function
-function updateVideoProgress(video) {
-  const progressBar = video.parentElement.querySelector(".video-progress-bar");
-  if (progressBar) {
+function updateVideoProgress(video, progressBar) {
+  if (progressBar && video.duration) {
     const progress = (video.currentTime / video.duration) * 100;
     progressBar.style.width = `${progress}%`;
   }
@@ -214,12 +274,14 @@ document.addEventListener("keydown", (e) => {
   );
   if (!activeVideo) return;
 
-  const playButton = activeVideo.parentElement.querySelector(".video-play-btn");
-  const spinner = activeVideo.parentElement.querySelector(".video-loading");
+  const videoContainer = activeVideo.parentElement;
+  const playButton = videoContainer.querySelector(".video-play-btn");
+  const spinner = videoContainer.querySelector(".video-loading");
+  const progressBar = videoContainer.querySelector(".video-progress-bar");
 
   if (e.code === "Space" || e.code === "KeyK") {
     e.preventDefault();
-    togglePlayPause(activeVideo, playButton, spinner);
+    togglePlayPause(activeVideo, playButton, spinner, progressBar);
   } else if (e.code === "KeyM") {
     e.preventDefault();
     activeVideo.muted = !activeVideo.muted;
