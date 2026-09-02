@@ -82,11 +82,15 @@ export default function Home() {
 
       <div className="grid flex-1 place-items-center">
         <div className="avatar-ring relative grid aspect-square w-[min(22rem,70vw)] place-items-center overflow-hidden rounded-full p-1 shadow-[0_0_80px_var(--accent-glow)]">
-          <div className="relative z-1 flex size-[calc(100%-0.5rem)] items-end justify-center overflow-hidden rounded-full bg-panel">
+          {/* The portrait is a cut-out, so the disc uses the page colour and
+              follows the theme instead of carrying its own background. */}
+          <div className="relative z-1 grid size-[calc(100%-0.5rem)] place-items-end justify-center overflow-hidden rounded-full bg-ink">
             <img
               src={profile.photo}
               alt={profile.name}
-              className="w-[88%] object-cover"
+              width="760"
+              height="760"
+              className="size-full origin-bottom -translate-x-[2%] scale-[0.94] object-contain object-bottom"
             />
           </div>
         </div>
