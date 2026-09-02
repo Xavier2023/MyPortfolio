@@ -1,0 +1,262 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Runtime theme variables — flipped by the `light-mode` class on <body>.
+   `@theme inline` makes every Tailwind colour utility emit var(...), so the
+   whole palette swaps at runtime without a single `dark:` variant in the JSX.
+   ========================================================================== */
+
+:root {
+  --ink: #07090d;
+  --panel: #0d1117;
+  --surface: #141a23;
+  --surface-hover: #1a212c;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+
+  --fg: #e9eef5;
+  --muted: #94a3b8;
+
+  --accent: #22c55e;
+  --accent-soft: #4ade80;
+  --accent-tint: rgba(34, 197, 94, 0.12);
+  --accent-glow: rgba(34, 197, 94, 0.35);
+  --on-accent: #04140a;
+
+  color-scheme: dark;
+}
+
+.light-mode {
+  --ink: #f5f7fa;
+  --panel: #ffffff;
+  --surface: #ffffff;
+  --surface-hover: #eef2f7;
+  --line: rgba(15, 23, 42, 0.1);
+  --line-strong: rgba(15, 23, 42, 0.18);
+
+  --fg: #0f172a;
+  --muted: #5b6b7f;
+
+  --accent: #12904f;
+  --accent-soft: #16a34a;
+  --accent-tint: rgba(18, 144, 79, 0.1);
+  --accent-glow: rgba(18, 144, 79, 0.22);
+  --on-accent: #ffffff;
+
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-tint: var(--accent-tint);
+  --color-on-accent: var(--on-accent);
+
+  --font-display: "Sora", "Poppins", system-ui, sans-serif;
+  --font-body: "Inter", "Poppins", system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-rise: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-ping-soft: ping-soft 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  --animate-spin-slow: spin 8s linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@keyframes ping-soft {
+  70%,
+  100% {
+    box-shadow: 0 0 0 0.6rem transparent;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--ink);
+    color: var(--fg);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.35s var(--ease-out-expo),
+      color 0.35s var(--ease-out-expo);
+  }
+
+  /* Ambient glow behind the whole site — depth without extra markup. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+        40rem 40rem at 78% -10%,
+        var(--accent-tint),
+        transparent 60%
+      ),
+      radial-gradient(
+        34rem 34rem at 5% 100%,
+        color-mix(in srgb, #0d9488 12%, transparent),
+        transparent 60%
+      );
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+  }
+
+  ::placeholder {
+    color: var(--muted);
+  }
+}
+
+/* ==========================================================================
+   The few pieces utilities can't express: the typewriter headline and the
+   rotating conic ring around the avatar.
+   ========================================================================== */
+
+@layer components {
+  .role-cycle span {
+    position: relative;
+    display: inline-block;
+    color: transparent;
+    -webkit-text-stroke: 0.05em var(--accent);
+    animation: role-swap 16s linear infinite;
+    animation-delay: calc(-4s * var(--i));
+  }
+
+  .role-cycle span::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    width: 0;
+    border-right: 2px solid var(--accent);
+    color: var(--accent);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: role-type 4s linear infinite;
+  }
+
+  .avatar-ring::before,
+  .avatar-ring::after {
+    content: "";
+    position: absolute;
+    width: 140%;
+    height: 300%;
+    background: conic-gradient(
+      transparent,
+      transparent,
+      transparent,
+      var(--accent)
+    );
+    animation: spin 8s linear infinite;
+  }
+
+  .avatar-ring::after {
+    background: conic-gradient(
+      transparent,
+      transparent,
+      transparent,
+      var(--accent-soft)
+    );
+    animation-delay: -4s;
+  }
+}
+
+@keyframes role-swap {
+  25%,
+  100% {
+    display: none;
+  }
+}
+
+@keyframes role-type {
+  10%,
+  100% {
+    width: 0;
+  }
+  70%,
+  90% {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Toastify overrides
+   ========================================================================== */
+
+.toastify {
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  padding: 14px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
