@@ -90,7 +90,7 @@ export default function Resume() {
               <PanelHeading
                 lead="My"
                 accent="Experience"
-                desc="Three years of shipping production frontends — currently leading a multi-currency payments platform and maintaining five public sites in the same group."
+                desc="Four years of shipping production frontends — currently leading a multi-currency payments platform and maintaining five public sites in the same group."
               />
               <div className={SCROLLER}>
                 {experience.map((job) => (
